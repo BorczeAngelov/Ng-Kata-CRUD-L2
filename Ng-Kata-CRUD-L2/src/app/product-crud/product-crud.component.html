@@ -1,1 +1,13 @@
 <p>product-crud works!</p>
+
+
+<li *ngFor="let product of (products$ | async)">
+
+    <button>X</button>
+    
+    <a>
+        <span class="">{{product.id}}</span>
+        {{product.name}}
+    </a>
+
+</li>
