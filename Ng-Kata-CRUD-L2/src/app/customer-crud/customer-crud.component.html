@@ -1,1 +1,23 @@
 <p>customer-crud works!</p>
+
+<li *ngFor="let customerWithProduct of (customersWithProduct$ | async)">
+
+    <div>
+
+        <button>X</button>
+
+        <a>
+            <span class="">{{customerWithProduct.id}}</span>
+            {{customerWithProduct.name}}
+
+        </a>
+
+
+        <div>
+            <label>Product name: 
+                {{customerWithProduct.productName}}
+                (Id: {{customerWithProduct.productId}})
+            </label>
+        </div>
+    </div>
+</li>

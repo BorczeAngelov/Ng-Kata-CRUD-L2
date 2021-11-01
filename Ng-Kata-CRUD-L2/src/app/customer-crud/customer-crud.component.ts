@@ -1,4 +1,7 @@
 import { Component, OnInit } from '@angular/core';
+import { Observable } from 'rxjs';
+import { CustomerWithProduct } from '../data/customerWithProduct';
+import { CustomerService } from './customer.service';
 
 @Component({
   selector: 'app-customer-crud',
@@ -6,10 +9,15 @@ import { Component, OnInit } from '@angular/core';
   styleUrls: ['./customer-crud.component.css']
 })
 export class CustomerCRUDComponent implements OnInit {
+  
+  customersWithProduct$: Observable<CustomerWithProduct[]> | undefined;
 
-  constructor() { }
+  constructor(private customerService: CustomerService) { }
 
   ngOnInit(): void {
+
+    this.customersWithProduct$ = this.customerService.getCustomersWithProduct();
+
   }
 
 }
