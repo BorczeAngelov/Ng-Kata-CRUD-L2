@@ -6,6 +6,9 @@ import { AppComponent } from './app.component';
 import { WelcomeComponent } from './welcome/welcome.component';
 import { CustomerCRUDComponent } from './customer-crud/customer-crud.component';
 import { ProductCRUDComponent } from './product-crud/product-crud.component';
+import { HttpClientModule } from '@angular/common/http';
+import { InMemoryDataService } from './data/in-memory-data.service';
+import { HttpClientInMemoryWebApiModule } from 'angular-in-memory-web-api';
 
 @NgModule({
   declarations: [
@@ -16,7 +19,9 @@ import { ProductCRUDComponent } from './product-crud/product-crud.component';
   ],
   imports: [
     BrowserModule,
-    AppRoutingModule
+    AppRoutingModule,
+    HttpClientModule,
+    HttpClientInMemoryWebApiModule.forRoot(InMemoryDataService),
   ],
   providers: [],
   bootstrap: [AppComponent]
