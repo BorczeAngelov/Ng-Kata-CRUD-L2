@@ -9,15 +9,13 @@ import { CustomerService } from './customer.service';
   styleUrls: ['./customer-crud.component.css']
 })
 export class CustomerCRUDComponent implements OnInit {
-  
+
   customersWithProduct$: Observable<CustomerWithProduct[]> | undefined;
 
   constructor(private customerService: CustomerService) { }
 
   ngOnInit(): void {
-
-    this.customersWithProduct$ = this.customerService.getCustomersWithProduct();
-
+    this.customersWithProduct$ = this.customerService.customersWithProduct$;
   }
 
 }

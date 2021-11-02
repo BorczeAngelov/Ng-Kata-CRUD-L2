@@ -17,32 +17,26 @@ export class CustomerService {
     private http: HttpClient,
     private productService: ProductService) { }
 
-  getCustomersWithProduct(): Observable<CustomerWithProduct[]> {
-
-    let customers$ = this.http.get<Customer[]>(this.url)
-      .pipe(
-        tap(data => console.log('Customers', JSON.stringify(data))),
-        catchError(this.handleError)
-      );
-
-    let products$ = this.productService.getProducts();
-
-    let customersWithProduct$ = combineLatest([
-      customers$,
-      products$
-    ]).pipe(
-      map(([customers, products]) => {
-        let helper = customers.map(customer => ({
-          ...customer,
-          productName: products.find(p => customer.productId === p.id)?.name
-        }) as CustomerWithProduct)
-
-        return helper;
-      })
+  customers$ = this.http.get<Customer[]>(this.url)
+    .pipe(
+      tap(data => console.log('Customers', JSON.stringify(data))),
+      catchError(this.handleError)
     );
 
-    return customersWithProduct$;
-  }
+  customersWithProduct$ = combineLatest([
+    this.customers$,
+    this.productService.getProducts()
+  ]).pipe(
+    map(([customers, products]) => {
+
+      let helper = customers.map(customer => ({
+        ...customer,
+        productName: products.find(p => customer.productId === p.id)?.name
+      }) as CustomerWithProduct)
+
+      return helper;
+    })
+  );
 
   private handleError(err: any) {
     // in a real world app, we may send the server to some remote logging infrastructure
