@@ -25,7 +25,7 @@ export class CustomerService {
 
   customersWithProduct$ = combineLatest([
     this.customers$,
-    this.productService.getProducts()
+    this.productService.products$
   ]).pipe(
     map(([customers, products]) => {
 
